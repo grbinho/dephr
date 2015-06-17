@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebPing
+namespace WebPing.Reporters
 {
-    class SignalRReporter
+    public enum DefaultReporters
     {
+        Trace,
+        SignalR
     }
 }

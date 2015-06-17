@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Hosting;
 using System.Web.Http;
 
 namespace WebPing
 {
     public static class HttpConfigurationExtensions
     {
+
         public static void EnableWebPing(this HttpConfiguration config)
         {
 
@@ -21,7 +23,11 @@ namespace WebPing
 
         public static void EnableWebPing(this HttpConfiguration config, WebPingConfiguration webPingConfig)
         {
-
+            HostingEnvironment.QueueBackgroundWorkItem(ct =>
+            {
+                var pinger = new Pinger(webPingConfig);
+                pinger.Monitor();
+            });
         }
     }
 }

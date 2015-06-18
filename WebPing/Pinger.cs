@@ -5,9 +5,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Web.Hosting;
 using WebPing.Reporters;
+using WebPing.Utils;
 
 namespace WebPing
 {
@@ -16,11 +15,16 @@ namespace WebPing
         private readonly IHearthBeatReporter _reporter;
 
         //TODO: Decide how long to cache service descovery results. (Configuration)
-        private readonly IServiceDiscovery _serviceDiscover;
+        private readonly IServiceDiscovery _serviceDiscovery;
 
         private readonly WebPingConfiguration _config;
 
-        private IDictionary<string, string> _serviceEndpoints;
+        private IDictionary<string, string> _serviceEndpointsCache;
+
+        private DateTime _nextServiceDisovery;
+
+        private ICircuitBreaker _serviceDiscoveryCircuit;
+        private ICircuitBreaker _pingCircuit;
 
 
         public Pinger(WebPingConfiguration config) 
@@ -31,10 +35,13 @@ namespace WebPing
 
         public Pinger(WebPingConfiguration config, IHearthBeatReporter reporter, IServiceDiscovery serviceDiscovery)
         {
-            _serviceEndpoints = new Dictionary<string, string>();
+            _serviceEndpointsCache = new Dictionary<string, string>();
             _config = config;
             _reporter = reporter;
-            _serviceDiscover = serviceDiscovery;
+            _serviceDiscovery = serviceDiscovery;
+            _nextServiceDisovery = DateTime.UtcNow;
+            _serviceDiscoveryCircuit = new PollyCircuitBreaker(new OptimisticCircuitBreakerConfiguration());
+            _pingCircuit = new PollyCircuitBreaker(new OptimisticCircuitBreakerConfiguration());
         }
 
 
@@ -44,34 +51,81 @@ namespace WebPing
         /// <param name="serviceName">Name of the service</param>
         private bool tryGetEndpoint(string serviceName, out string endpoint)
         {
+            bool ttlExpired = false;
+
             //Check service disovery timeout (TTL)
+            if (DateTime.UtcNow > _nextServiceDisovery)
+            {
+                ttlExpired = true;
+                _nextServiceDisovery = DateTime.UtcNow.AddSeconds(_config.ServiceDiscoveryTTL);
+            }
 
-            //If TTL == 0 || not cached, call service disovery, upon success, add to cache, upon failure, return false;
+            if (ttlExpired || !_serviceEndpointsCache.Keys.Any(k => k.Equals(serviceName)))
+            {
+                endpoint = null;            
 
-            //else get from cache.
+                try
+                {
+                    endpoint = _serviceDiscoveryCircuit.Execute(() => _serviceDiscovery.DiscoverService(serviceName));
+                }
+                catch (CircuitBrokenException ex)
+                {
+                    //This will be invoked every time we try to call execute and circuit is open.
+                    //Circuit colses depending on the setting.
+                    Trace.WriteLine(string.Format("Circuit broke when discovering a service: {0}.", serviceName));
+                }
 
+                if(endpoint == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    //Refresh cache
+                    _serviceEndpointsCache[serviceName] = endpoint;
+                }
+            }
+            else
+            {
+                endpoint = _serviceEndpointsCache
+                    .Where(s => s.Key.Equals(serviceName, StringComparison.InvariantCultureIgnoreCase))
+                    .Select(s => s.Value).First();
+            }
+
+            return true;
         }
 
         private HearthBeat pingEndpoint(HttpClient client, string serviceName)
         {
             string endpoint;
 
-            if (!tryGetEndpoint(serviceName, out endpoint))
+            var endpointExists = tryGetEndpoint(serviceName, out endpoint));
+            var beat = new HearthBeat(serviceName, endpoint, 0, false);
+
+            if(!endpointExists)
             {
-                return new HearthBeat(serviceName, endpoint, 0, false));
+                return beat;
             }
 
-            var stopwatch = new Stopwatch();
+            try
+            {
+                var stopwatch = new Stopwatch();
+                stopwatch.Start();
+                //TODO: Test this idea.. vs. Do sync web request.. Could be cheaper.
+                var resultTask = _pingCircuit.ExecuteAsync(() => client.GetAsync(endpoint));
+                resultTask.Wait();
 
-            stopwatch.Start();
+                stopwatch.Stop();
 
-            var resultTask = client.GetAsync(endpoint);
-            resultTask.Wait();
+                var result = resultTask.Result;
+                beat = new HearthBeat(serviceName, endpoint, stopwatch.ElapsedMilliseconds, result.IsSuccessStatusCode);
+            }
+            catch(CircuitBrokenException ex)
+            {
+                Trace.WriteLine(string.Format("Circuit broke when during a hearth bead event for a service: {0}.", serviceName));
+            }
 
-            stopwatch.Stop();
-
-            var result = resultTask.Result;
-            return new HearthBeat(serviceName, endpoint, stopwatch.ElapsedMilliseconds, result.IsSuccessStatusCode);
+            return beat;
         }
 
         /// <summary>
@@ -80,8 +134,7 @@ namespace WebPing
         public void Monitor()
         {
             var client = new HttpClient();
-            //Run hearth beating in sequence for the first version
-
+            //Run hearth beating in sequence (for the first version)
 
             while(true)
             {
@@ -92,9 +145,8 @@ namespace WebPing
                     _reporter.Report(beat);
                 }
 
-
                 //Configurable ping interval
-                Thread.Sleep(5000);
+                Thread.Sleep(_config.PingInterval);
             }
         }
     }

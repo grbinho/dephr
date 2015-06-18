@@ -35,6 +35,10 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Polly, Version=2.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Polly.2.2.2\lib\net45\Polly.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -65,6 +69,10 @@
     <Compile Include="Reporters\DefaultReporterFactory.cs" />
     <Compile Include="Reporters\SignalRReporter.cs" />
     <Compile Include="Reporters\TraceReporter.cs" />
+    <Compile Include="Utils\ICircuitBreaker.cs" />
+    <Compile Include="Utils\ICircuitBreakerConfiguration.cs" />
+    <Compile Include="Utils\OptimisticCircuitBreakerConfiguration.cs" />
+    <Compile Include="Utils\PollyCircuitBreaker.cs" />
     <Compile Include="WebPingConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>

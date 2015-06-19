@@ -4,50 +4,32 @@
 # User-specific files
 *.suo
 *.user
-<<<<<<< HEAD
-*.sln.docstates
-
-=======
 *.userosscache
 *.sln.docstates
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
->>>>>>> ff30297c229c36ff5d021996d9f11f167c421455
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
-<<<<<<< HEAD
-x64/
-=======
 [Rr]eleases/
 x64/
 x86/
->>>>>>> ff30297c229c36ff5d021996d9f11f167c421455
 build/
 bld/
 [Bb]in/
 [Oo]bj/
 
-<<<<<<< HEAD
-# Roslyn cache directories
-*.ide/
-=======
-# Visual Studo 2015 cache/options directory
+# Visual Studio 2015 cache/options directory
 .vs/
->>>>>>> ff30297c229c36ff5d021996d9f11f167c421455
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
-<<<<<<< HEAD
-#NUNIT
-=======
 # NUNIT
->>>>>>> ff30297c229c36ff5d021996d9f11f167c421455
 *.VisualState.xml
 TestResult.xml
 
@@ -55,6 +37,10 @@ TestResult.xml
 [Dd]ebugPS/
 [Rr]eleasePS/
 dlldata.c
+
+# DNX
+project.lock.json
+artifacts/
 
 *_i.c
 *_p.c
@@ -108,7 +94,7 @@ _ReSharper*/
 *.[Rr]e[Ss]harper
 *.DotSettings.user
 
-# JustCode is a .NET coding addin-in
+# JustCode is a .NET coding add-in
 .JustCode
 
 # TeamCity is a build add-in
@@ -147,24 +133,6 @@ publish/
 # Publish Web Output
 *.[Pp]ublish.xml
 *.azurePubxml
-<<<<<<< HEAD
-## TODO: Comment the next line if you want to checkin your
-## web deploy settings but do note that will include unencrypted
-## passwords
-#*.pubxml
-
-# NuGet Packages Directory
-packages/*
-## TODO: If the tool you use requires repositories.config
-## uncomment the next line
-#!packages/repositories.config
-
-# Enable "build/" folder in the NuGet Packages folder since
-# NuGet packages use it for MSBuild targets.
-# This line needs to be after the ignore of the build folder
-# (and the packages folder if the line above has been uncommented)
-!packages/build/
-=======
 # TODO: Comment the next line if you want to checkin your web deploy settings 
 # but database connection strings (with potential passwords) will be unencrypted
 *.pubxml
@@ -178,7 +146,6 @@ packages/*
 !**/packages/build/
 # Uncomment if necessary however generally it will be regenerated when needed
 #!**/packages/repositories.config
->>>>>>> ff30297c229c36ff5d021996d9f11f167c421455
 
 # Windows Azure Build Output
 csx/
@@ -187,13 +154,13 @@ csx/
 # Windows Store app package directory
 AppPackages/
 
-# Others
-<<<<<<< HEAD
-sql/
-*.Cache
-=======
+# Visual Studio cache files
+# files ending in .cache can be ignored
 *.[Cc]ache
->>>>>>> ff30297c229c36ff5d021996d9f11f167c421455
+# but keep track of directories ending in .cache
+!*.[Cc]ache/
+
+# Others
 ClientBin/
 [Ss]tyle[Cc]op.*
 ~$*
@@ -203,7 +170,7 @@ ClientBin/
 *.pfx
 *.publishsettings
 node_modules/
-bower_components/
+orleans.codegen.cs
 
 # RIA/Silverlight projects
 Generated_Code/
@@ -228,12 +195,6 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 
-<<<<<<< HEAD
-# LightSwitch generated files
-GeneratedArtifacts/
-_Pvt_Extensions/
-ModelManifest.xml
-=======
 # Node.js Tools for Visual Studio
 .ntvs_analysis.dat
 
@@ -242,4 +203,3 @@ ModelManifest.xml
 
 # Visual Studio 6 workspace options file
 *.opt
->>>>>>> ff30297c229c36ff5d021996d9f11f167c421455

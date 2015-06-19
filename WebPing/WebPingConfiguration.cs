@@ -6,22 +6,17 @@ namespace WebPing
 {
     public class WebPingConfiguration
     {
-        private ICollection<string> _serviceNames = new Collection<string>();
-        public ICollection<string> ServiceNames
+        private ICollection<ServiceEndpoint> _endpoints = new Collection<ServiceEndpoint>();
+        public ICollection<ServiceEndpoint> Endpoints
         {
-            get { return _serviceNames; }
-            set { _serviceNames = value; }
-        }
-
-        private IDictionary<string, string> _serviceMap = new Dictionary<string, string>();
-        public IDictionary<string, string> ServiceMap
-        {
-            get { return _serviceMap; }
-            set { _serviceMap = value; }
+            get { return _endpoints; }
+            set { _endpoints = value; }
         }
 
         private DefaultReporters _reporter = DefaultReporters.Trace;
-
+        /// <summary>
+        /// Reporter used to report results of hearth beat calls
+        /// </summary>
         public DefaultReporters Reporter
         {
             get { return _reporter; }
@@ -29,6 +24,9 @@ namespace WebPing
         }
 
         private int _pingInterval = 5000;
+        /// <summary>
+        /// Interval of hearth beat pings
+        /// </summary>
         public int PingInterval
         {
             get { return _pingInterval; }

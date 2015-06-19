@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebPing
 {
-    //TODO: Struct?
     public struct HearthBeat: IEquatable<HearthBeat>
     {
-        public HearthBeat(string serviceName, string serviceEndpoint, long responseTime, bool up): this()
+        public HearthBeat(ServiceEndpoint service, long responseTime, bool up)
+            : this (service.Name, service.Url, responseTime, up) { }
+
+        public HearthBeat(string serviceName, string serviceEndpoint, long responseTime, bool up)
+            : this()
         {
             ServiceName = serviceName;
             ServiceEndpoint = serviceEndpoint;
@@ -17,12 +16,21 @@ namespace WebPing
             Up = up;
         }
 
+        /// <summary>
+        /// Name of the service
+        /// </summary>
         public string ServiceName { get; }
+        /// <summary>
+        /// Http endpoint of the service
+        /// </summary>
         public string ServiceEndpoint { get; }
         /// <summary>
         /// Response time in milliseconds
         /// </summary>
         public long ResponseTime { get; }
+        /// <summary>
+        /// Is service up or down?
+        /// </summary>
         public bool Up { get; }
 
 

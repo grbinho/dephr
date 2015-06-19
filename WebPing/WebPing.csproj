@@ -58,7 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DictionaryServiceDiscovery.cs" />
+    <Compile Include="DefaultServiceDiscovery.cs" />
     <Compile Include="HearthBeat.cs" />
     <Compile Include="HttpConfigurationExtensions.cs" />
     <Compile Include="Reporters\DefaultReporters.cs" />
@@ -69,6 +69,7 @@
     <Compile Include="Reporters\DefaultReporterFactory.cs" />
     <Compile Include="Reporters\SignalRReporter.cs" />
     <Compile Include="Reporters\TraceReporter.cs" />
+    <Compile Include="ServiceEndpoint.cs" />
     <Compile Include="Utils\CircuitBrokenException.cs" />
     <Compile Include="Utils\ICircuitBreaker.cs" />
     <Compile Include="Utils\ICircuitBreakerConfiguration.cs" />

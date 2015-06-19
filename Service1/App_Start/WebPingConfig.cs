@@ -9,9 +9,10 @@ namespace Service1
         {
             var webPingConfiguration = new WebPingConfiguration();
             //TODO: Make this part better
-            webPingConfiguration.ServiceNames.Add("Service1");
-            webPingConfiguration.ServiceMap.Add("Service1", "http://localhost:8090/");
-            //
+            webPingConfiguration.Endpoints.Add(new ServiceEndpoint {
+                Name = "Service1",
+                Url = "http://localhost:8090/"
+            });
             webPingConfiguration.PingInterval = 5000;
             webPingConfiguration.ServiceDiscoveryTTL = 30;
 

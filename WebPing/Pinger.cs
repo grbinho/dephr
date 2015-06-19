@@ -5,8 +5,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
-using WebPing.Reporters;
-using WebPing.Utils;
+using WebPing.Reporting;
+using WebPing.ServiceDiscovery;
+using WebPing.CircuitBreaker;
 
 namespace WebPing
 {
@@ -22,7 +23,7 @@ namespace WebPing
         private ICircuitBreaker _pingCircuit;
 
         public Pinger(WebPingConfiguration config) 
-            : this(config, DefaultReporterFactory.CreateReporter(config.Reporter), new DefaultServiceDiscovery(config.Endpoints)) {}
+            : this(config, ReporterFactory.CreateReporter(config.Reporter), new DefaultServiceDiscovery(config.Endpoints)) {}
 
         public Pinger(WebPingConfiguration config, IHearthBeatReporter reporter)
             : this(config, reporter, new DefaultServiceDiscovery(config.Endpoints)) {}

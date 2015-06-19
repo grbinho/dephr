@@ -58,23 +58,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DefaultServiceDiscovery.cs" />
+    <Compile Include="ServiceDiscovery\DefaultServiceDiscovery.cs" />
     <Compile Include="HearthBeat.cs" />
     <Compile Include="HttpConfigurationExtensions.cs" />
-    <Compile Include="Reporters\DefaultReporters.cs" />
-    <Compile Include="Reporters\IHearthBeatReporter.cs" />
-    <Compile Include="IServiceDiscovery.cs" />
+    <Compile Include="Reporting\Reporters.cs" />
+    <Compile Include="Reporting\IHearthBeatReporter.cs" />
+    <Compile Include="ServiceDiscovery\IServiceDiscovery.cs" />
     <Compile Include="Pinger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reporters\DefaultReporterFactory.cs" />
-    <Compile Include="Reporters\SignalRReporter.cs" />
-    <Compile Include="Reporters\TraceReporter.cs" />
+    <Compile Include="Reporting\ReporterFactory.cs" />
+    <Compile Include="Reporting\SignalRReporter.cs" />
+    <Compile Include="Reporting\StatsdReporter.cs" />
+    <Compile Include="Reporting\TraceReporter.cs" />
     <Compile Include="ServiceEndpoint.cs" />
-    <Compile Include="Utils\CircuitBrokenException.cs" />
-    <Compile Include="Utils\ICircuitBreaker.cs" />
-    <Compile Include="Utils\ICircuitBreakerConfiguration.cs" />
-    <Compile Include="Utils\OptimisticCircuitBreakerConfiguration.cs" />
-    <Compile Include="Utils\PollyCircuitBreaker.cs" />
+    <Compile Include="CircuitBreaker\CircuitBrokenException.cs" />
+    <Compile Include="CircuitBreaker\ICircuitBreaker.cs" />
+    <Compile Include="CircuitBreaker\ICircuitBreakerConfiguration.cs" />
+    <Compile Include="CircuitBreaker\OptimisticCircuitBreakerConfiguration.cs" />
+    <Compile Include="CircuitBreaker\PollyCircuitBreaker.cs" />
     <Compile Include="WebPingConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using WebPing.Reporters;
+using WebPing.Reporting;
 
 namespace WebPing
 {
@@ -13,11 +13,11 @@ namespace WebPing
             set { _endpoints = value; }
         }
 
-        private DefaultReporters _reporter = DefaultReporters.Trace;
+        private Reporters _reporter = Reporters.Trace;
         /// <summary>
         /// Reporter used to report results of hearth beat calls
         /// </summary>
-        public DefaultReporters Reporter
+        public Reporters Reporter
         {
             get { return _reporter; }
             set { _reporter = value; }

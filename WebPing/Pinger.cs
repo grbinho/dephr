@@ -156,7 +156,7 @@ namespace WebPing
 
         public bool WebGet(string endpoint)
         {
-            var request = HttpWebRequest.CreateHttp(endpoint);
+            var request = WebRequest.CreateHttp(endpoint);
             request.Method = "GET";
             var response = (HttpWebResponse)request.GetResponse();
 

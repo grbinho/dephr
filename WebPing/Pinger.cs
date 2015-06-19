@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
@@ -99,7 +100,7 @@ namespace WebPing
         {
             string endpoint;
 
-            var endpointExists = tryGetEndpoint(serviceName, out endpoint));
+            var endpointExists = tryGetEndpoint(serviceName, out endpoint);
             var beat = new HearthBeat(serviceName, endpoint, 0, false);
 
             if(!endpointExists)
@@ -112,18 +113,21 @@ namespace WebPing
                 var stopwatch = new Stopwatch();
                 stopwatch.Start();
                 //TODO: Test this idea.. vs. Do sync web request.. Could be cheaper.
-                var resultTask = _pingCircuit.ExecuteAsync(() => client.GetAsync(endpoint));
-                resultTask.Wait();
+                var result = _pingCircuit.Execute(() => WebGet(endpoint));
 
                 stopwatch.Stop();
 
-                var result = resultTask.Result;
-                beat = new HearthBeat(serviceName, endpoint, stopwatch.ElapsedMilliseconds, result.IsSuccessStatusCode);
+                beat = new HearthBeat(serviceName, endpoint, stopwatch.ElapsedMilliseconds, result);
             }
-            catch(CircuitBrokenException ex)
+            catch (CircuitBrokenException ex)
             {
                 Trace.WriteLine(string.Format("Circuit broke when during a hearth bead event for a service: {0}.", serviceName));
             }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(string.Format("Exception occured when calling endpoint: {0}", endpoint));
+            }
+
 
             return beat;
         }
@@ -135,7 +139,7 @@ namespace WebPing
         {
             var client = new HttpClient();
             //Run hearth beating in sequence (for the first version)
-
+            
             while(true)
             {
                 foreach (var service in _config.ServiceNames)
@@ -149,5 +153,15 @@ namespace WebPing
                 Thread.Sleep(_config.PingInterval);
             }
         }
+
+        public bool WebGet(string endpoint)
+        {
+            var request = HttpWebRequest.CreateHttp(endpoint);
+            request.Method = "GET";
+            var response = (HttpWebResponse)request.GetResponse();
+
+            return response.StatusCode == HttpStatusCode.OK;
+        }
+
     }
 }

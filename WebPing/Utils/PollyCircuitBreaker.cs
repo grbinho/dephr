@@ -52,22 +52,72 @@ namespace WebPing.Utils
                     throw new CircuitBrokenException();
                 }
             }
-            
         }
 
         public TResult Execute<TResult>(Func<TResult> action)
         {
-            throw new NotImplementedException();
+            if (_policy == null)
+            {
+                return action.Invoke();
+            }
+            else
+            {
+                try
+                {
+                    return _policy.Execute(action);
+                }
+                catch (BrokenCircuitException ex)
+                {
+                    //TODO: need additional information about from where did this happen
+
+                    Trace.WriteLine(string.Format("Circuit was broken. Exception: {0}", ex.ToString()));
+                    throw new CircuitBrokenException();
+                }
+            }
         }
 
-        public Task ExecuteAsync(Func<Task> action)
+        public async Task ExecuteAsync(Func<Task> action)
         {
-            throw new NotImplementedException();
+            if (_policyAsync == null)
+            {
+                await action.Invoke();
+            }
+            else
+            {
+                try
+                {
+                    await _policyAsync.ExecuteAsync(action);
+                }
+                catch (BrokenCircuitException ex)
+                {
+                    //TODO: need additional information about from where did this happen
+
+                    Trace.WriteLine(string.Format("Circuit was broken. Exception: {0}", ex.ToString()));
+                    throw new CircuitBrokenException();
+                }
+            }
         }
 
-        public Task<TResult> ExecuteAsync<TResult>(Func<Task<TResult>> action)
+        public async Task<TResult> ExecuteAsync<TResult>(Func<Task<TResult>> action)
         {
-            throw new NotImplementedException();
+            if (_policyAsync == null)
+            {
+                return await action.Invoke();
+            }
+            else
+            {
+                try
+                {
+                    return await _policyAsync.ExecuteAsync(action);
+                }
+                catch (BrokenCircuitException ex)
+                {
+                    //TODO: need additional information about from where did this happen
+
+                    Trace.WriteLine(string.Format("Circuit was broken. Exception: {0}", ex.ToString()));
+                    throw new CircuitBrokenException();
+                }
+            }
         }
     }
 }

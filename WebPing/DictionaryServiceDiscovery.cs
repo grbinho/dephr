@@ -11,6 +11,11 @@ namespace WebPing
 
         public DictionaryServiceDiscovery(IDictionary<string, string> serviceMap)
         {
+            if(serviceMap == null)
+            {
+                throw new ArgumentException("serviceMap");
+            }
+
             _serviceMap = serviceMap;
         }
 

@@ -69,6 +69,7 @@
     <Compile Include="Reporters\DefaultReporterFactory.cs" />
     <Compile Include="Reporters\SignalRReporter.cs" />
     <Compile Include="Reporters\TraceReporter.cs" />
+    <Compile Include="Utils\CircuitBrokenException.cs" />
     <Compile Include="Utils\ICircuitBreaker.cs" />
     <Compile Include="Utils\ICircuitBreakerConfiguration.cs" />
     <Compile Include="Utils\OptimisticCircuitBreakerConfiguration.cs" />

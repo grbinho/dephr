@@ -11,6 +11,9 @@ using WebPing.CircuitBreaker;
 
 namespace WebPing
 {
+    /// <summary>
+    /// Used for sending hearth beat signals to depending services.
+    /// </summary>
     public class Pinger
     {
         private readonly IHearthBeatReporter _reporter;
@@ -38,7 +41,6 @@ namespace WebPing
             _serviceDiscoveryCircuit = new PollyCircuitBreaker(new OptimisticCircuitBreakerConfiguration());
             _pingCircuit = new PollyCircuitBreaker(new OptimisticCircuitBreakerConfiguration());
         }
-
 
         /// <summary>
         /// Gets endpoint for service name. If discovery timeout has passed, uses service discovery and caches result. If not returns result from cache.

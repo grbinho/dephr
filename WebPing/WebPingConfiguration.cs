@@ -15,7 +15,7 @@ namespace WebPing
 
         private Reporters _reporter = Reporters.Trace;
         /// <summary>
-        /// Reporter used to report results of hearth beat calls
+        /// If using one of the default reporters, set which one.
         /// </summary>
         public Reporters Reporter
         {

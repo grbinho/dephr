@@ -17,5 +17,8 @@ namespace WebPing.Reporting
         {
             throw new NotImplementedException();
         }
+
+        //TODO: Embed SignalR page and web page. 
+        //Add monitoring page route to default routes.
     }
 }

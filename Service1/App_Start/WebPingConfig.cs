@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using Service1.Areas.Monitoring;
+using System.Web.Http;
 using WebPing;
 
 namespace Service1
@@ -16,7 +17,7 @@ namespace Service1
             webPingConfiguration.PingInterval = 5000;
             webPingConfiguration.ServiceDiscoveryTTL = 30;
 
-            config.EnableWebPing(webPingConfiguration);
+            config.EnableWebPing(webPingConfiguration, new SignalRReporter());
         }
     }
 }

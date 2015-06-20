@@ -58,10 +58,14 @@
                     addNewResponseTime(summary.LastResponseTime);
                     var template = [
                         '<div id="' + summary.Name + '">',
-                        '<h4>' + summary.Name + '<h4>',                       
+                        '<h4>' + summary.Name + '</h4>',
+                        '<h5>' + summary.Endpoint + '</h5>',
                         '<div id="graph" />',
-                        '<div><span>Up: </span><span>' + summary.PercentUp + ' %</span>',
+                        '<div><span>Up time: </span><span>' + summary.PercentUp + ' %</span>',
                         '<div><span>Last response time: </span><span>' + summary.LastResponseTime + ' ms</span>',
+                        '<div><span>Min response time: </span><span>' + summary.MinResponseTime + ' ms</span>',
+                        '<div><span>Max response time: </span><span>' + summary.MaxResponseTime + ' ms</span>',
+                        '<div><span>Avg response time: </span><span>' + summary.AvgResponseTime + ' ms</span>',
                         '</div>'
                     ];
 

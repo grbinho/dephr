@@ -6,6 +6,7 @@ namespace Service1.Areas.Monitoring.Models
     public class HealthSummary
     {
         public string Name { get; private set; }
+        public string Endpoint { get; set; }
         public long LastResponseTime { get; private set; }
         public bool Up { get; private set; }
 
@@ -35,11 +36,12 @@ namespace Service1.Areas.Monitoring.Models
         public HealthSummary(string name)
         {
             Name = name;
+            MinResponseTime = long.MaxValue;
         }
 
         public void AddHearthBeat(HearthBeat beat)
         {
-            if (!beat.ServiceName.Equals(Name, System.StringComparison.InvariantCultureIgnoreCase))
+            if (!beat.ServiceName.Equals(Name, StringComparison.InvariantCultureIgnoreCase))
             {
                 return;
             }

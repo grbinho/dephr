@@ -38,6 +38,7 @@ namespace Service1.Areas.Monitoring
                 _serviceSummaryList.Add(summary);
             }
 
+            summary.Endpoint = beat.ServiceEndpoint;
             summary.AddHearthBeat(beat);
         }
 

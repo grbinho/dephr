@@ -1,2 +1,2 @@
 # dephr
-Monitor heart beat of dependant service.
+Monitor and report heart beat of your dependency services.

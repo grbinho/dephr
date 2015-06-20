@@ -20,7 +20,7 @@ namespace Service1
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            WebPingConfig.Register(config);
+            DephrConfig.Register(config);
         }
     }
 }

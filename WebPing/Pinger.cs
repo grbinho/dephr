@@ -5,37 +5,38 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
-using WebPing.Reporting;
-using WebPing.ServiceDiscovery;
-using WebPing.CircuitBreaker;
+using Dephr.Reporting;
+using Dephr.ServiceDiscovery;
+using Dephr.CircuitBreaker;
 
-namespace WebPing
+namespace Dephr
 {
     /// <summary>
     /// Used for sending hearth beat signals to depending services.
     /// </summary>
     public class Pinger
     {
-        private readonly IHearthBeatReporter _reporter;
+        private readonly IList<IHearthBeatReporter> _reporters;
         //TODO: Decide how long to cache service descovery results. (Configuration)
         private readonly IServiceDiscovery _serviceDiscovery;
-        private readonly WebPingConfiguration _config;
+        private readonly DephrConfiguration _config;
         private IDictionary<string, string> _serviceEndpointsUrlCache;
         private DateTime _nextServiceDisovery;
         private ICircuitBreaker _serviceDiscoveryCircuit;
         private ICircuitBreaker _pingCircuit;
 
-        public Pinger(WebPingConfiguration config) 
-            : this(config, ReporterFactory.CreateReporter(config.Reporter), new DefaultServiceDiscovery(config.Endpoints)) {}
+        public Pinger(DephrConfiguration config) 
+            : this(config, new List<IHearthBeatReporter> { ReporterFactory.CreateReporter(config.Reporter) }, 
+                            new DefaultServiceDiscovery(config.Endpoints)) {}
 
-        public Pinger(WebPingConfiguration config, IHearthBeatReporter reporter)
-            : this(config, reporter, new DefaultServiceDiscovery(config.Endpoints)) {}
+        public Pinger(DephrConfiguration config, IList<IHearthBeatReporter> reporters)
+            : this(config, reporters, new DefaultServiceDiscovery(config.Endpoints)) {}
 
-        public Pinger(WebPingConfiguration config, IHearthBeatReporter reporter, IServiceDiscovery serviceDiscovery)
+        public Pinger(DephrConfiguration config, IList<IHearthBeatReporter> reporters, IServiceDiscovery serviceDiscovery)
         {
             _serviceEndpointsUrlCache = new Dictionary<string, string>();
             _config = config;
-            _reporter = reporter;
+            _reporters = reporters;
             _serviceDiscovery = serviceDiscovery;
             _nextServiceDisovery = DateTime.UtcNow;
             _serviceDiscoveryCircuit = new PollyCircuitBreaker(new OptimisticCircuitBreakerConfiguration());
@@ -141,7 +142,10 @@ namespace WebPing
                 {
                     //Ping the endpoint (GET request)
                     var beat = pingEndpoint(service);
-                    _reporter.Report(beat);
+                    foreach (var reporter in _reporters)
+                    {
+                        reporter.Report(beat);
+                    }                
                 }
 
                 //Configurable ping interval

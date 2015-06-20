@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using WebPing.Reporting;
+using Dephr.Reporting;
 
-namespace WebPing
+namespace Dephr
 {
-    public class WebPingConfiguration
+    public class DephrConfiguration
     {
         private ICollection<ServiceEndpoint> _endpoints = new Collection<ServiceEndpoint>();
         public ICollection<ServiceEndpoint> Endpoints

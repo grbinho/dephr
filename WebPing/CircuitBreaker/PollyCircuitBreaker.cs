@@ -4,7 +4,7 @@ using Polly;
 using System.Diagnostics;
 using Polly.CircuitBreaker;
 
-namespace WebPing.CircuitBreaker
+namespace Dephr.CircuitBreaker
 {
     public class PollyCircuitBreaker : ICircuitBreaker
     {

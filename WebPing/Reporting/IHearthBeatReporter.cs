@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace WebPing.Reporting
+namespace Dephr.Reporting
 {
     /// <summary>
     /// Reports hearth beats for configured services.

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace WebPing.CircuitBreaker
+namespace Dephr.CircuitBreaker
 {
     public interface ICircuitBreaker
     {

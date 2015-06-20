@@ -1,4 +1,4 @@
-﻿namespace WebPing.CircuitBreaker
+﻿namespace Dephr.CircuitBreaker
 {
     public interface ICircuitBreakerConfiguration
     {

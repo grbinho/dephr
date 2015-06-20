@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Net.Http;
 
-namespace WebPing
+namespace Dephr
 {
     public class ServiceEndpoint
     {

@@ -7,9 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service1", "Service1\Servic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service2", "Service2\Service2.csproj", "{F1790EDE-CC46-4B56-99E1-73B472E3E172}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebPing", "WebPing\WebPing.csproj", "{2D3823CA-13EF-4330-AF02-7484EF05FC7B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dephr", "WebPing\Dephr.csproj", "{2D3823CA-13EF-4330-AF02-7484EF05FC7B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dephr.Reporters.SignalR", "Dephr.Reporters.SignalR\Dephr.Reporters.SignalR.csproj", "{1BAFD9AC-E77E-46CD-89DA-E2F6EBAE75A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dephr.Reporters.Statsd", "Dephr.Reporters.Statsd\Dephr.Reporters.Statsd.csproj", "{0D913CC9-5264-4A6B-A0BD-B948D238F97D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{1BAFD9AC-E77E-46CD-89DA-E2F6EBAE75A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BAFD9AC-E77E-46CD-89DA-E2F6EBAE75A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BAFD9AC-E77E-46CD-89DA-E2F6EBAE75A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D913CC9-5264-4A6B-A0BD-B948D238F97D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D913CC9-5264-4A6B-A0BD-B948D238F97D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D913CC9-5264-4A6B-A0BD-B948D238F97D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D913CC9-5264-4A6B-A0BD-B948D238F97D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

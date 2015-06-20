@@ -1,12 +1,10 @@
-﻿namespace WebPing.Reporting
+﻿namespace Dephr.Reporting
 {
     /// <summary>
     /// Default supported reporters
     /// </summary>
     public enum Reporters
     {
-        Trace,
-        SignalR,
-        Statsd
+        Trace
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace WebPing.Reporting
+namespace Dephr.Reporting
 {
     /// <summary>
     /// Reports heart beat information to Diagnostics.Trace

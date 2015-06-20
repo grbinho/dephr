@@ -1,5 +1,5 @@
 ﻿using System;
-using WebPing;
+using Dephr;
 
 namespace Service1.Areas.Monitoring.Models
 {

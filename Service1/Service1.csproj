@@ -248,9 +248,9 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WebPing\WebPing.csproj">
+    <ProjectReference Include="..\WebPing\Dephr.csproj">
       <Project>{2d3823ca-13ef-4330-af02-7484ef05fc7b}</Project>
-      <Name>WebPing</Name>
+      <Name>Dephr</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

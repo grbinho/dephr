@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WebPing.CircuitBreaker
+namespace Dephr.CircuitBreaker
 {
     public class CircuitBrokenException: Exception
     {

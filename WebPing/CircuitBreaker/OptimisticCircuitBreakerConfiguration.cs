@@ -1,4 +1,4 @@
-﻿namespace WebPing.CircuitBreaker
+﻿namespace Dephr.CircuitBreaker
 {
     /// <summary>
     /// Breaks circuit for 30 seconds and tolerates 3 exceptions.

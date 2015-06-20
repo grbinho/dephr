@@ -1,28 +1,32 @@
 ﻿using System.Web.Hosting;
 using System.Web.Http;
-using WebPing.Reporting;
-using WebPing.ServiceDiscovery;
+using Dephr.Reporting;
+using Dephr.ServiceDiscovery;
+using System.Collections.Generic;
 
-namespace WebPing
+namespace Dephr
 {
     public static class HttpConfigurationExtensions
     {
-        public static void EnableWebPing(this HttpConfiguration config, 
-            WebPingConfiguration webPingConfig, IHearthBeatReporter reporter)
+        public static void EnableDephr(this HttpConfiguration config, 
+            DephrConfiguration DephrConfig, IList<IHearthBeatReporter> reporters)
         {
             HostingEnvironment.QueueBackgroundWorkItem(ct =>
             {
-                var pinger = new Pinger(webPingConfig, reporter);
+                var pinger = new Pinger(DephrConfig, reporters);
                 pinger.Monitor();
             });
         }
 
-        public static void EnableWebPing(this HttpConfiguration config, WebPingConfiguration webPingConfig, IHearthBeatReporter reporter, IServiceDiscovery serviceDiscovery)
+        public static void EnableDephr(this HttpConfiguration config, 
+            DephrConfiguration DephrConfig, 
+            IList<IHearthBeatReporter> reporters, 
+            IServiceDiscovery serviceDiscovery)
         {
             //Check if it's already running, multiple calls.. multiple checks
             HostingEnvironment.QueueBackgroundWorkItem(ct =>
             {
-                var pinger = new Pinger(webPingConfig, reporter, serviceDiscovery);
+                var pinger = new Pinger(DephrConfig, reporters, serviceDiscovery);
                 pinger.Monitor();
             });
         }

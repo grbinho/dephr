@@ -2,12 +2,11 @@
 using Service1.Areas.Monitoring.Hubs;
 using Service1.Areas.Monitoring.Models;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using WebPing;
-using WebPing.Reporting;
+using Dephr;
+using Dephr.Reporting;
 using System.Linq;
 
 namespace Service1.Areas.Monitoring

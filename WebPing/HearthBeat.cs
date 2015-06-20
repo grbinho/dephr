@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WebPing
+namespace Dephr
 {
     public struct HearthBeat: IEquatable<HearthBeat>
     {

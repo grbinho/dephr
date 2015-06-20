@@ -1,4 +1,4 @@
-﻿namespace WebPing.Reporting
+﻿namespace Dephr.Reporting
 {
     public static class ReporterFactory
     {
@@ -7,7 +7,6 @@
             switch (reporter)
             {
                 case Reporters.Trace: return new TraceReporter();
-                case Reporters.SignalR: return new SignalRReporter();
                 //statsd
                 //graphite
                 default: return new TraceReporter();

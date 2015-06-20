@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace WebPing.ServiceDiscovery
+namespace Dephr.ServiceDiscovery
 {
     public interface IServiceDiscovery
     {

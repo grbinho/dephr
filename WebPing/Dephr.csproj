@@ -7,8 +7,8 @@
     <ProjectGuid>{2D3823CA-13EF-4330-AF02-7484EF05FC7B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WebPing</RootNamespace>
-    <AssemblyName>WebPing</AssemblyName>
+    <RootNamespace>Dephr</RootNamespace>
+    <AssemblyName>Dephr</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -67,8 +67,6 @@
     <Compile Include="Pinger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reporting\ReporterFactory.cs" />
-    <Compile Include="Reporting\SignalRReporter.cs" />
-    <Compile Include="Reporting\StatsdReporter.cs" />
     <Compile Include="Reporting\TraceReporter.cs" />
     <Compile Include="ServiceEndpoint.cs" />
     <Compile Include="CircuitBreaker\CircuitBrokenException.cs" />

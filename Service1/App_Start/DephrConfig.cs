@@ -19,7 +19,7 @@ namespace Service1
 
             dephrConfiguration.Endpoints.Add(new ServiceEndpoint {
                 Name = "IBMBluemix",
-                Url = "http://testservice1.eu-gb.mybluemix.net/"
+                Url = "http://testservice1.eu-gb.mybluemix.net/monitor/ping"
             });
 
             dephrConfiguration.PingInterval = 5000;

@@ -19,19 +19,19 @@ namespace Dephr
         /// <summary>
         /// Name of the service
         /// </summary>
-        public string ServiceName { get; }
+        public string ServiceName { get; private set; }
         /// <summary>
         /// Http endpoint of the service
         /// </summary>
-        public string ServiceEndpoint { get; }
+        public string ServiceEndpoint { get; private set; }
         /// <summary>
         /// Response time in milliseconds
         /// </summary>
-        public long ResponseTime { get; }
+        public long ResponseTime { get; private set; }
         /// <summary>
         /// Is service up or down?
         /// </summary>
-        public bool Up { get; }
+        public bool Up { get; private set; }
 
 
         //TODO: Additional information

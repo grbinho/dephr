@@ -74,7 +74,7 @@
     <Compile Include="CircuitBreaker\ICircuitBreakerConfiguration.cs" />
     <Compile Include="CircuitBreaker\OptimisticCircuitBreakerConfiguration.cs" />
     <Compile Include="CircuitBreaker\PollyCircuitBreaker.cs" />
-    <Compile Include="WebPingConfiguration.cs" />
+    <Compile Include="DephrConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
